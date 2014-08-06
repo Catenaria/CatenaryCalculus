@@ -1,0 +1,144 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'] ]}});
+    </script>
+    <script type="text/javascript"
+	    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <link rel="stylesheet" type="text/css" href="css/calculo-mecanico.css" media="screen" />
+    <title></title>
+  </head>
+  <body>
+
+    <h1>Cálculo mecánico de cables</h1>
+
+    <p>
+      Vamos a ver cómo deben tenerse en cuenta las condiciones atmosféricas a la hora de calcular los parámetros de una línea eléctrica. En particular, estaremos interesados en estudiar como varía la <b>flecha</b>
+    </p>
+
+    <form>
+      <h4>Construcción inicial</h4>
+      Vano:               <input type="text" value="100",  name="span">
+      Temperatura:        <input type="text" value="20",   name="temperature">  
+      Presión de viento:  <input type="text" value="0",    name="windPressure"> 
+      Tensión:            <input type="text" value="5500", name="tension">       
+      <input type="button" value="Construir", onClick="if(!construido) construirDibujo(this.form);">
+    </form>
+    <form>
+      <h4>Variaciones</h4>
+      <!-- Vano:               <input type="text" value="100",  name="span">          <br> -->
+      Temperatura:        <input type="text" value="20",   name="temperature">   
+      Presión de viento:  <input type="text" value="0",    name="windPressure">  
+      <input type="button" value="Actualizar dibujo", onClick="actualizarDibujo(this.form);">
+    </form>
+    </p>
+
+    <div id='divCatenaria'>
+      
+    </div>
+
+
+
+    <h2>Datos utilizados</h2>
+    <p>
+      En este ejemplo estamos utilizando el cable que mencionábamos en el artículo (LA-56) que viene caracterizado por los siguientes parámetros.
+    </p>
+
+    <table style="width:300px" border="1">
+      <tr>
+	<td>Magnitud</td>
+	<td>Valor</td> 
+	<td>Unidades</td>
+      </tr>
+      <tr>
+	<td>Diametro</td>
+	<td>$9.5$</td> 
+	<td>[mm]</td>
+      </tr>
+      <tr>
+	<td>Peso</td>
+	<td>$0.189$</td> 
+	<td>[kgf]</td>
+      </tr>
+      <tr>
+	<td>Sección</td>
+	<td>$54.60$</td> 
+	<td>[mm$^2$]</td>
+      </tr>
+      <tr>
+	<td>Coeficiente de dilatación</td>
+	<td>$0.00001910$</td> 
+	<td>[ºC$^{-1}$]</td>
+      </tr>
+      <tr>
+	<td>Modulo de Young</td>
+	<td>$8100$</td> 
+	<td>[kgf/mm$^2$]</td>
+      </tr>
+      <tr>
+	<td>Carga de rotura</td>
+	<td>$1670$</td> 
+	<td>[kgf]</td>
+      </tr>
+    </table>
+
+    <p>
+      Equivalentemente, en el sistema internacional de unidades (S.I.) la tabla quedaría así:
+    </p>
+
+    <table style="width:300px" border="1">
+      <tr>
+	<td>Magnitud</td>
+	<td>Valor</td> 
+	<td>Unidades</td>
+      </tr>
+      <tr>
+	<td>Diametro</td>
+	<td>$9.5$</td> 
+	<td>[mm]</td>
+      </tr>
+      <tr>
+	<td>Densidad lineal</td>
+	<td>$0.189$</td> 
+	<td>[Kg/m]</td>
+      </tr>
+      <tr>
+	<td>Sección</td>
+	<td>$54.60$</td> 
+	<td>[mm$^2$]</td>
+      </tr>
+      <tr>
+	<td>Coeficiente de dilatación</td>
+	<td>$1.91\times10^{-5}$</td> 
+	<td>[ºC$^{-1}$]</td>
+      </tr>
+      <tr>
+	<td>Modulo de Young</td>
+	<td>$7.9461 \times 10^{10}$</td> 
+	<td>[Pa]</td>
+      </tr>
+      <tr>
+	<td>Carga de rotura</td>
+	<td>$16383$</td> 
+	<td>[N]</td>
+      </tr>
+    </table>
+
+    <h2>Explicación</h2>
+
+    <p>
+      A lo largo de los artículos hemos ido introduciendo las ecuaciones que modelan el comportamiento de los cables. Así fue como aparecieron los conceptos de catenaria y de flecha.
+    </p>
+
+    <input type="button" value="Construir", onClick="if(!tablaConstruida) tableCreate();">
+
+    <script src="js/catenary.js"></script>
+    <script src="js/sceneDraw.js"></script>
+    <script src="js/catenaryDraw.js"></script>
+    <script src="js/calculo-mecanico.js"></script>
+
+    
+</body>
+</html>

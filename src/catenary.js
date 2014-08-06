@@ -43,6 +43,14 @@ function Cable() {
   
 };
 
+function CableHalcon () {
+    this.elasticModulus = 7730*1000000*G;
+    this.dilationCoefficient = 0.00001899;
+    this.section = 281.10;
+    this.linearDensity = 0.9746;
+    this.diameter = 21.793;
+}
+
 function Conditions() {
 
   // optional values

@@ -37,19 +37,22 @@ function resuelveParabola(a,x1,y1,x2,y2) {
   return [c1,c2];
 };
 
-
-
-function Cable() {
-  
-};
-
-function CableHalcon () {
-    this.elasticModulus = 7730*1000000*G;
-    this.dilationCoefficient = 0.00001899;
-    this.section = 281.10;
-    this.linearDensity = 0.9746;
-    this.diameter = 21.793;
+var CableLA56 = {
+  elasticModulus: 7.9641*Math.pow(10,10),
+  dilationCoefficient: 0.00001910,     
+  section: 54.60,
+  linearDensity: 0.189,   
+  diameter: 9.5
 }
+
+var cableHalcon = {
+    elasticModulus: 7730*1000000*G,
+    dilationCoefficient: 0.00001899,     
+    section: 281.10,
+    linearDensity: 0.9746,   
+    diameter: 21.793
+}
+
 
 function Conditions() {
 
@@ -193,30 +196,3 @@ var solveGeneralChangeEquation = function(A,B) {
   
 }
 
-
-
-
-
-
-
-
-var cable = new Cable();
-cable.elasticModulus = 7730*1000000*G;     // Pa;
-cable.dilationCoefficient = 0.00001899;    // ºC^-1
-cable.section = 281.10;                    // mm^2
-cable.linearDensity = 0.9746;              // kg/m
-cable.diameter = 21.793;                   // mm
-
-var conditions1 = new Conditions();
-conditions1.span = 300;                    // m
-conditions1.temperature = -20;             // ºC
-conditions1.iceCoefficient = 0.36;
-conditions1.tension = 2939*G;
-
-var conditions2 = new Conditions();
-conditions2.span = 300;
-conditions2.temperature = 10;
-
-var tramo = new Tramo(cable, conditions1, conditions2);
-
-console.log(tramo.table(0,40,5));

@@ -225,16 +225,16 @@ describe("Tramo: created with a cable and two conditions (initial and final)", f
       expect(tramo.loadRate).toBeDefined();
     });
     it("should return 2.72 with initialConditions (example from the book)", function () {
-      expect(tramo.loadRate(tramo.initialConditions)).toBeBetween(2.71,2.73);
+      expect(tramo.loadRate(1)).toBeBetween(2.71,2.73);
     });
     it("and set that value to the initialConditions.loadRate attribute", function () {
-      expect(tramo.initialConditions.loadRate).toBe(tramo.loadRate(tramo.initialConditions));
+      expect(tramo.initialConditions.loadRate).toBe(tramo.loadRate(1));
     });
     it("should return 1 in the finalConditions of the example (when not considering neither wind nor ice)", function () {
-      expect(tramo.loadRate(tramo.finalConditions)).toBe(1);
+      expect(tramo.loadRate(2)).toBe(1);
     });
     it("and set that value to the finalConditions.loadRate attribute", function () {
-      expect(tramo.finalConditions.loadRate).toBe(tramo.loadRate(tramo.finalConditions));
+      expect(tramo.finalConditions.loadRate).toBe(tramo.loadRate(2));
     });
   });
 
@@ -253,10 +253,10 @@ describe("Tramo: created with a cable and two conditions (initial and final)", f
       expect(tramo.loadRate).toHaveBeenCalled();
     });
     it(" --------> with initialConditions as an argument (i.e. loadRate(initialConditions))", function () {
-      expect(tramo.loadRate).toHaveBeenCalledWith(conditions1);
+      expect(tramo.loadRate).toHaveBeenCalledWith(1);
     });
     it(" --------> with finalConditions as an argument (i.e. loadRate(finalConditions))", function () {
-      expect(tramo.loadRate).toHaveBeenCalledWith(conditions2);
+      expect(tramo.loadRate).toHaveBeenCalledWith(2);
     });
   });
 

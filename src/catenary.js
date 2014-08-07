@@ -72,7 +72,13 @@ function Tramo(cable, initialConditions, finalConditions) {
   this.initialConditions = initialConditions;
   this.finalConditions = finalConditions;
 
-  this.loadRate = function (conditions) {
+  this.loadRate = function (situation) {
+
+    var conditions;
+    if(situation == 1)           conditions = this.initialConditions;
+    else if (situation == 2)     conditions = this.finalConditions;
+    else                         console.log('No se en que condiciones calcular loadRate');
+
     var ph = conditions.iceCoefficient*Math.sqrt(this.cable.diameter);
     var pv = conditions.windPressure * (this.cable.diameter/1000 + 2*conditions.iceWidth); //note that diameter is converted to meters
     var p  = this.cable.linearDensity;
@@ -86,6 +92,7 @@ function Tramo(cable, initialConditions, finalConditions) {
   };
 
   this.sag = function() {
+    this.solveChangeEquation();
     return this.initialConditions.span*this.initialConditions.span*this.cable.linearDensity*this.finalConditions.loadRate*G / (8*this.finalConditions.tension);
   };
 
@@ -94,8 +101,8 @@ function Tramo(cable, initialConditions, finalConditions) {
   };
 
   this.solveChangeEquation = function () {
-    this.loadRate(initialConditions);
-    this.loadRate(finalConditions);
+    this.loadRate(1);
+    this.loadRate(2);
 
     var x = solveGeneralChangeEquation(this.A(), this.B()); // x is the solution in Kg / mm^2
     var tension = x * G * this.cable.section;  // tension is x converted to Newtons
